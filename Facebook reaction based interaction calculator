@@ -1,0 +1,61 @@
+/*****************************************************************************
+*
+*
+*program:facebookpostinterestingnesscalculator
+*purpose: finding the interestingness of a facebook thai fashion post based on distance calculation
+*Author:Semicide
+*Date:19/05/2022
+*
+*
+*****************************************************************************/
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <math.h>
+
+int main()
+{
+
+   FILE *fptr;
+   fptr=fopen("facebook_post_dataset.txt","r");
+   float actions [700];
+   char type [700];
+   float distance;
+   char response[700];
+   
+   while(feof(fptr)){
+
+   fscanf(fptr,"%d,%s,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d",&action[0],&type[0],&action[1],&action[2],&action[3],&action[4],&action[5],&action[6],&action[7],&action[8]&action[9]); /*scan the lines*/
+   
+   distance = sqrt(actions((actions[1]-230,12),2)+pow((action[2]-224,36),2)+pow((actions[3]-40,02),2)+pow((actions[4]-215,04),2)+pow((actions[5]-12,73),2)+pow((actions[6]-1,29),2)+pow((actions[7]-0,70),2)+pow((actions[8]-0,24),2)+pow((actions[9]-0,11),2));  /*calculating the distance*/
+   
+   if(distance>592){/*assigning interestingness of the content*/
+   	
+   if(type[0]=="video" || type[0]=="photo"){
+	strcpy(response[0],"very interesting");
+   
+   }
+   else{
+   strcpy(response[0],"interesting");
+   }
+   }
+   else{
+      if(type[0]=="video" || type[0]=="photo"){
+   	strcpy(response[0],"Ordinary");
+   
+   }
+   else{
+   strcpy(response[0],"Boring");
+   }
+   
+}
+printer(int distance,char type[],int actions[],response[]); /*goes at the printer function to print outputs in a file*/
+}
+
+}
+  
+void printer(int distance,char type[],int actions[],response[]){
+	FILE *fptr;
+   	fptr=fopen("output.txt","w");
+   	fprintf(fptr,"%d,%s,%d,%d,%d,%d,%d,%d,%d,%d,%s",action[0],type[0],action[1],action[2],action[3],action[4],action[5],action[6],action[7],action[8],action[9],char response[0]);/*writes in the file*/
+}
