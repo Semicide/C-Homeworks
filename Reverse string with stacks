@@ -1,0 +1,100 @@
+/******************************************************************************
+Program:Reverse string with stacks
+Purpose:Reversing strings with stacks
+Author:Mahmut Semih Güner
+31/05/2022
+
+*******************************************************************************/
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct Node {
+char letter;
+struct Node* next;
+    
+};
+/*Creating a head node*/
+struct Node * stack_create(){
+    struct Node* top = (struct Node*)malloc(sizeof(struct Node));
+    top=NULL;
+    return top;
+}
+
+/*To push items into stack*/
+void stack_push(struct Node** topr, char letter){
+
+    struct Node* new_Node = (struct Node*)malloc(sizeof(struct Node));
+
+    if (new_Node == NULL) {
+        printf("Stack overflow");
+        getchar();
+        exit(0);
+    }
+
+    new_Node->letter = letter;
+    new_Node->next = (*topr);
+    (*topr) = new_Node;
+
+}
+/*Pops the top item*/
+int stack_pop(struct Node** topr){
+    char res;
+    struct Node* top;
+	
+    if (*topr == NULL) {
+        printf("Stack overflow");
+        getchar();
+        exit(0);
+    }
+    else {
+        top = *topr;
+        res = top->letter;
+        *topr = top->next;
+        free(top);
+        return res;
+    }
+}
+/*returns the top item without deleting it*/
+char stack_top(struct Node** topr){
+    return (*topr)->letter;
+}
+/*Checks if the stack is empty*/
+int stack_isempty(struct Node** topr){
+    if(*topr==NULL){
+        return 0;
+    }
+    else{
+        return 1;
+    }
+}
+/*Prints the item in the stack*/
+void print_stack(struct Node** topr){
+    
+    struct Node* top = (*topr);
+    while(top!=NULL){
+        top=top->next;
+    }
+}
+
+
+void main(){
+    char str[50];
+    printf("Please write something: ");
+    scanf("%s",str);
+    int len = strlen(str);
+    struct Node* temp =stack_create();
+    int i;
+    for (i = 0; i < len; i++)
+        stack_push(&temp, str[i]);
+    print_stack(&temp);
+    printf("\n");
+    
+    for (i = 0; i < len; i++)
+        str[i] = stack_pop(&temp);
+
+    printf("Reverse of this string is: %s  ", str);
+    printf("\n");
+    
+ 
+}
